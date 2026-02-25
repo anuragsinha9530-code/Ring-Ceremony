@@ -2,6 +2,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<!-- Mobile zoom disable -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
 <title>Wedding Entry</title>
 
 <style>
@@ -12,10 +16,14 @@ body{
     justify-content:center;
     align-items:center;
     background:black;
+    overflow:hidden;
+    touch-action: manipulation;
 }
 
 video{
-    width:450px;
+    width:100vw;
+    height:100vh;
+    object-fit:contain;
     cursor:pointer;
 }
 </style>
@@ -23,23 +31,34 @@ video{
 
 <body>
 
-<video id="doorVideo">
+<video id="doorVideo" playsinline>
     <source src="door.mp4" type="video/mp4">
 </video>
 
 <script>
+
 let video = document.getElementById("doorVideo");
+let lastTap = 0;
 
-video.ondblclick = function(){
+video.addEventListener("touchend", function () {
 
-    video.play();
+    let currentTime = new Date().getTime();
+    let tapLength = currentTime - lastTap;
 
-    // jab video khatam ho tab next page
-    video.onended = function(){
-        window.location.href = "welcome.html";
+    if (tapLength < 500 && tapLength > 0) {
+
+        video.play();
+
+        video.onended = function(){
+            window.location.href = "welcome.html";
+        }
+
     }
 
-};
+    lastTap = currentTime;
+
+});
+
 </script>
 
 </body>
