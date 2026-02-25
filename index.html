@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Wedding Entry</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:black;
+}
+
+video{
+    width:450px;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<video id="doorVideo">
+    <source src="door.mp4" type="video/mp4">
+</video>
+
+<script>
+let video = document.getElementById("doorVideo");
+
+video.ondblclick = function(){
+
+    video.play();
+
+    // jab video khatam ho tab next page
+    video.onended = function(){
+        window.location.href = "welcome.html";
+    }
+
+};
+</script>
+
+</body>
+</html>
